@@ -6,31 +6,31 @@ public class MorseCode {
 	}
 
 	public String encode(String message) {
-		String morse = "";
+		StringBuilder builder = new StringBuilder();
 		String[] words = message.split(" ");
 		for (int i = 0; i < words.length; i++) {
 			char[] letters = words[i].toCharArray();
 			for (int j = 0; j < letters.length; j++) {
 				for (CodeConversion code : CodeConversion.values()) {
 					if (letters[j] == code.getCharacterConversion()) {
-						morse += code.getCodeConversion();
+						builder.append(code.getCodeConversion());
 						continue;
 					}
 				}
 				if (j < letters.length - 1) {
-					morse += " ";
+					builder.append(" ");
 				}
 			}
 			if (i < words.length - 1) {
-				morse += "   ";
+				builder.append("   ");
 			}
 		}
-		return morse;
+		return builder.toString();
 
 	}
 
 	public String decode(String code) {
-		String message = "";
+		StringBuilder message = new StringBuilder();
 		String[] letters;
 
 		// split code into words of english language
@@ -45,7 +45,7 @@ public class MorseCode {
 			for (int j = 0; j < letters.length; j++) {
 				for (CodeConversion converting : CodeConversion.values()) {
 					if (letters[j].equals(converting.getCodeConversion())) {
-						message += converting.getCharacterConversion();
+						message.append(converting.getCharacterConversion());
 						continue;
 					}
 				}
@@ -53,11 +53,11 @@ public class MorseCode {
 			// add a space between each word but not the last
 			if (i != words.length - 1) {
 
-				message += " ";
+				message.append(" ");
 			}
 		}
 
-		return message;
+		return message.toString();
 	}
 
 	// public String decode() {

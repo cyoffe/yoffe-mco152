@@ -3,14 +3,12 @@ package yoffe.quadraticEquation;
 public class QuadraticEquation {
 	private double a;
 	private double b;
-	private double c;
 	private double discriminant;
 
 	public QuadraticEquation(double a, double b, double c) throws InvalidRootException {
 		if(a == 0) throw new InvalidRootException();
 		this.a = a;
 		this.b = b;
-		this.c = c;
 		this.discriminant = getDiscriminant(a, b, c);
 	}
 

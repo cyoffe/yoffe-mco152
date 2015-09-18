@@ -2,14 +2,12 @@ package yoffe.physics;
 
 public class Projectile {
 
-	private double angle;
 	private double velocity;
 	private double time;
 	private double radians;
 	
 
 	public Projectile(double angle, double velocity, double time) {
-		this.angle = angle;
 		this.velocity = velocity;
 		this.time = time;
 		radians = Math.toRadians(angle);
