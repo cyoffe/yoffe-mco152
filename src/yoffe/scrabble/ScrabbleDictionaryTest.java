@@ -1,25 +1,26 @@
 package yoffe.scrabble;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.junit.Assert;
 import org.junit.Test;
-import junit.framework.Assert;
 
 public class ScrabbleDictionaryTest {
 
 	@Test
-	public void containsTest() throws FileNotFoundException {
-		ScrabbleDictionary dic = new ScrabbleDictionary("US.dic");
-		String word = "mother";
-		boolean hasWord = dic.contains(word);
-		Assert.assertTrue(hasWord);
+	public void containsFalseTest() throws IOException {
+		final ScrabbleDictionary dic = new ScrabbleDictionary("US.dic");
+		final String word = "excpetion";
+		final boolean hasWord = dic.contains(word);
+		Assert.assertFalse(hasWord);
 	}
 
 	@Test
-	public void containsFalseTest() throws FileNotFoundException {
-		ScrabbleDictionary dic = new ScrabbleDictionary("US.dic");
-		String word = "excpetion";
-		boolean hasWord = dic.contains(word);
-		Assert.assertFalse(hasWord);
+	public void containsTest() throws IOException {
+		final ScrabbleDictionary dic = new ScrabbleDictionary("US.dic");
+		final String word = "mother";
+		final boolean hasWord = dic.contains(word);
+		Assert.assertTrue(hasWord);
 	}
 
 }

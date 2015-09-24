@@ -1,27 +1,26 @@
 package yoffe.morsecode;
 
+import org.junit.Assert;
 import org.junit.Test;
-
-import junit.framework.Assert;
 
 public class MorseCodeTest {
 
 	@Test
-	public void encodeTest() {
-		MorseCode code = new MorseCode();
-		String message = "sept 16";
-		String convertedCode = code.encode(message);
+	public void decodeTest() {
+		final MorseCode code = new MorseCode();
+		final String codedMessage = "... . .--. -   .---- -....";
+		final String englishConverted = code.decode(codedMessage).toLowerCase();
 
-		Assert.assertEquals("... . .--. -   .---- -....", convertedCode);
+		Assert.assertEquals("sept 16", englishConverted);
 	}
 
 	@Test
-	public void decodeTest() {
-		MorseCode code = new MorseCode();
-		String codedMessage = "... . .--. -   .---- -....";
-		String englishConverted = code.decode(codedMessage).toLowerCase();
+	public void encodeTest() {
+		final MorseCode code = new MorseCode();
+		final String message = "sept 16";
+		final String convertedCode = code.encode(message);
 
-		Assert.assertEquals("sept 16", englishConverted);
+		Assert.assertEquals("... . .--. -   .---- -....", convertedCode);
 	}
 
 }

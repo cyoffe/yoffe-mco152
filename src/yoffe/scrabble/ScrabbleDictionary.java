@@ -1,26 +1,29 @@
 package yoffe.scrabble;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashSet;
-import java.util.Scanner;
 
 public class ScrabbleDictionary {
 
 	HashSet<String> dictionary;
-	
-	public ScrabbleDictionary(String fileName) throws FileNotFoundException {
-		Scanner input = new Scanner(new File(fileName));
+
+	public ScrabbleDictionary(String fileName) throws IOException {
+		final BufferedReader input = new BufferedReader(new FileReader(fileName));
 		dictionary = new HashSet<String>();
-		
-		while (input.hasNext()) {
-			dictionary.add(input.next());
+
+		String line;
+		while ((line = input.readLine()) != null) {
+			dictionary.add(line);
 		}
+
+		input.close();
 	}
 
 	public boolean contains(String word) {
 		return (dictionary.contains(word));
-			
+
 	}
-	
+
 }
