@@ -4,9 +4,10 @@ public class PythagoreanTheorem {
 	private double a;
 	private double b;
 	private double c;
-	
-	public PythagoreanTheorem(){
+
+	public PythagoreanTheorem() {
 	}
+
 	public void setAB(double a, double b) {
 		this.a = a;
 		this.b = b;
@@ -24,17 +25,16 @@ public class PythagoreanTheorem {
 		this.c = c;
 		this.a = Math.sqrt((c * c) - (b * b));
 	}
-	
-	public double getA(){
+
+	public double getA() {
 		return this.a;
 	}
-	
-	public double getB(){
+
+	public double getB() {
 		return this.b;
 	}
-	
-	public double getC(){
+
+	public double getC() {
 		return this.c;
 	}
 }
-

@@ -9,7 +9,7 @@ public class ScrabbleDictionaryTest {
 
 	@Test
 	public void containsFalseTest() throws IOException {
-		final ScrabbleDictionary dic = new ScrabbleDictionary("US.dic");
+		ScrabbleDictionary dic = ScrabbleDictionary.getInstance("US.dic");
 		final String word = "excpetion";
 		final boolean hasWord = dic.contains(word);
 		Assert.assertFalse(hasWord);
@@ -17,7 +17,7 @@ public class ScrabbleDictionaryTest {
 
 	@Test
 	public void containsTest() throws IOException {
-		final ScrabbleDictionary dic = new ScrabbleDictionary("US.dic");
+		ScrabbleDictionary dic = ScrabbleDictionary.getInstance("US.dic");
 		final String word = "mother";
 		final boolean hasWord = dic.contains(word);
 		Assert.assertTrue(hasWord);
