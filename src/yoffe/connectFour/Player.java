@@ -1,15 +1,17 @@
 package yoffe.connectFour;
 
+import java.awt.Color;
+
 public class Player {
-	private String playerColor;
+	private Color playerColor;
 	private int playerNumber;
 
-	public Player(String color, int playerNumber) {
+	public Player(Color color, int playerNumber) {
 		this.playerColor = color;
 		this.playerNumber = playerNumber;
 	}
 
-	public String getPlayerColor() {
+	public Color getPlayerColor() {
 		return playerColor;
 	}
 

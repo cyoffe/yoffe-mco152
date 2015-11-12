@@ -28,12 +28,11 @@ public class AirplaneSeats {
 	public AirplaneSeats(int rows, int columns) {
 		this.row = rows;
 		this.column = columns;
-		seats = new String[rows][columns];
 
 		seatsTaken = new HashMap<String, String>();
 		for (int i = 1; i <= rows; i++) {
-			for (int j = beginningAlphabet; j <= (beginningAlphabet + columns); j++) {
-				seatsTaken.put((((char) j) + String.valueOf(i)).toUpperCase(), EMPTY);
+			for (char j = 'A'; j < columns; j++) {
+				seatsTaken.put((j + String.valueOf(i)).toUpperCase(), EMPTY);
 			}
 		}
 	}
@@ -150,7 +149,7 @@ public class AirplaneSeats {
 			for (int i = 1; i <= row; i++) {
 				String seat1 = seatsTaken.get(i + ((char) j));
 				String seat2 = seatsTaken.get((i + 1) + ((char) j));
-				if (seat1.equals(EMPTY) && seat2.equals(EMPTY)) {
+				if ((seat1 == EMPTY) && (seat2 == EMPTY)) {
 					seatsInRow.add(seat1);
 					seatsInRow.add(seat2);
 					seatsTogether++;
@@ -169,7 +168,7 @@ public class AirplaneSeats {
 			for (int j = beginningAlphabet; j <= (beginningAlphabet + column); j++) {
 				String seat1 = seatsTaken.get(i + ((char) j));
 				String seat2 = seatsTaken.get((i + ((char) (j + 1))));
-				if (seat1.equals(EMPTY) && seat2.equals(EMPTY)) {
+				if ((seat1 == EMPTY) && (seat2 == EMPTY)) {
 					seatsInRow.add(seat1);
 					seatsInRow.add(seat2);
 					seatsTogether++;
