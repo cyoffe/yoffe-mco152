@@ -31,7 +31,7 @@ public class ConnectFourGUI extends JFrame {
 		game = new Game();
 
 		final Container container = getContentPane();
-		container.setBackground(Color.PINK);
+		container.setBackground(new Color(0, 153, 153));
 		setLayout(new GridLayout(7, 7));
 
 		for (int i = 0; i < numColumns; i++) {
@@ -52,16 +52,21 @@ public class ConnectFourGUI extends JFrame {
 						circles[row][col].repaint();
 
 						// check if there is a winner
-
 						winner = game.isWinner();
 						if (winner) {
 							JOptionPane.showMessageDialog(container, "WINNER!");
-							JOptionPane.showConfirmDialog(container, "Do you want to play again?");
+							int choice = JOptionPane.showConfirmDialog(container, "Do you want to play again?");
+							if (choice == JOptionPane.YES_OPTION) {
+								newGame();
+								return;
+							} else {
+								dispose();// end game and close window
+							}
+
 						}
-
 					}
-				}
 
+				}
 			});
 
 			add(buttons[i]);
@@ -76,9 +81,20 @@ public class ConnectFourGUI extends JFrame {
 
 	}
 
+	public void newGame() {
+		game = new Game();
+		for (int i = 0; i < circles.length; i++) {
+			for (int j = 0; j < circles[i].length; j++) {
+				circles[i][j].setColor(Color.WHITE);
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		ConnectFourGUI game = new ConnectFourGUI();
 		game.setVisible(true);
+		game.setResizable(false);
 
 	}
+
 }

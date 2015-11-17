@@ -10,7 +10,6 @@ import java.util.Map;
  * methods.
  */
 public class AirplaneSeats {
-	private String[][] seats;
 	private int row;
 	private int column;
 	private HashMap<String, String> seatsTaken;
@@ -31,7 +30,7 @@ public class AirplaneSeats {
 
 		seatsTaken = new HashMap<String, String>();
 		for (int i = 1; i <= rows; i++) {
-			for (char j = 'A'; j < columns; j++) {
+			for (char j = 'A'; j < (columns + beginningAlphabet); j++) {
 				seatsTaken.put((j + String.valueOf(i)).toUpperCase(), EMPTY);
 			}
 		}
@@ -48,6 +47,10 @@ public class AirplaneSeats {
 	 *             constructor
 	 */
 	public void reserve(String seatName) throws AlreadyReservedException, SeatOutOfBoundsException {
+		if (!seatsTaken.containsKey(seatName)) {
+			throw new SeatOutOfBoundsException();
+		}
+
 		if (seatsTaken.get(seatName).equals(EMPTY)) {
 			seatsTaken.put(seatName, FULL);
 		} else {
@@ -63,7 +66,7 @@ public class AirplaneSeats {
 	 * @return true if the seat has been reserved, otherwise false.
 	 */
 	public boolean isReserved(String seatName) {
-		return seatsTaken.get(seatName).equals(EMPTY);
+		return seatsTaken.get(seatName).equals(FULL);
 	}
 
 	/**
@@ -80,6 +83,9 @@ public class AirplaneSeats {
 	 */
 	public void reserveAll(String... seatNames) throws AlreadyReservedException, SeatOutOfBoundsException {
 		for (String seatName : seatNames) {
+			if (!seatsTaken.containsKey(seatName)) {
+				throw new SeatOutOfBoundsException();
+			}
 			reserve(seatName);
 		}
 	}
@@ -99,31 +105,21 @@ public class AirplaneSeats {
 	public String toString() {
 		StringBuilder airplane = new StringBuilder();
 
-		airplane.append(" ");
+		airplane.append("  ");
 
 		for (int i = beginningAlphabet; i < (beginningAlphabet + column); i++) {
 			airplane.append((char) i);
 		}
 
-		int count = 0;
-		int rowCounter = 0;
-		for (Map.Entry<String, String> entry : seatsTaken.entrySet()) {
-			if (rowCounter == row) {
-				break;
-			}
-			if (count == 0) {
-				airplane.append("\n");
-				airplane.append(++rowCounter + " ");
-			}
-			if (count < column) {
-				airplane.append(entry.getValue());
-				count++;
-			}
-			if (count == column) {
-				count = 0;
+		airplane.append("\n");
+
+		for (int i = 1; i <= this.row; i++) {
+			airplane.append(i + " ");
+			for (char j = 'A'; j < (this.column + beginningAlphabet); j++) {
+				airplane.append(seatsTaken.get((j + String.valueOf(i)).toUpperCase()));
 
 			}
-
+			airplane.append("\n");
 		}
 
 		return airplane.toString();
@@ -140,47 +136,68 @@ public class AirplaneSeats {
 	 * @return an ArrayList of seatNames of the seats that have been reserved.
 	 * @throws NotEnoughSeatsException
 	 *             if there are not enough seats together to reserve.
+	 * @throws SeatOutOfBoundsException
+	 * @throws AlreadyReservedException
 	 */
-	public ArrayList<String> reserveGroup(int numberOfSeatsTogether) throws NotEnoughSeatsException {
-		int seatsTogether = 1;
+	public ArrayList<String> reserveGroup(int numberOfSeatsTogether)
+			throws NotEnoughSeatsException, AlreadyReservedException, SeatOutOfBoundsException {
+
 		ArrayList<String> seatsInRow = new ArrayList<String>();
 
-		for (int j = beginningAlphabet; j <= (beginningAlphabet + column); j++) {
-			for (int i = 1; i <= row; i++) {
-				String seat1 = seatsTaken.get(i + ((char) j));
-				String seat2 = seatsTaken.get((i + 1) + ((char) j));
-				if ((seat1 == EMPTY) && (seat2 == EMPTY)) {
-					seatsInRow.add(seat1);
-					seatsInRow.add(seat2);
+		for (int i = 1; i <= row; i++) {
+			int seatsTogether = 0;
+			for (int j = beginningAlphabet; j <= (beginningAlphabet + column); j++) {
+				String seat = (char) j + String.valueOf(i);
+				if (seatsTaken.get(seat) == EMPTY) {
+					seatsInRow.add(seat);
 					seatsTogether++;
 				} else {
-					seatsTogether = 1;
+					if (((beginningAlphabet + column) - beginningAlphabet) >= numberOfSeatsTogether) {
+						continue;
+					} else {
+						seatsInRow.clear();
+						seatsTogether = 0;
+						break;
+					}
 				}
 
 				if (seatsTogether == numberOfSeatsTogether) {
+					for (String s : seatsInRow) {
+						reserve(s);
+					}
 					return seatsInRow;
 				}
 			}
 		}
 
 		seatsInRow = new ArrayList<String>();
-		for (int i = 1; i <= row; i++) {
-			for (int j = beginningAlphabet; j <= (beginningAlphabet + column); j++) {
-				String seat1 = seatsTaken.get(i + ((char) j));
-				String seat2 = seatsTaken.get((i + ((char) (j + 1))));
-				if ((seat1 == EMPTY) && (seat2 == EMPTY)) {
-					seatsInRow.add(seat1);
-					seatsInRow.add(seat2);
+
+		for (int j = beginningAlphabet; j <= (beginningAlphabet + column); j++) {
+			int seatsTogether = 0;
+			for (int i = 1; i <= row; i++) {
+				String seat = (char) j + String.valueOf(i);
+				if (seatsTaken.get(seat) == EMPTY) {
+					seatsInRow.add(seat);
 					seatsTogether++;
 				} else {
-					seatsTogether = 1;
+					if (((beginningAlphabet + column) - beginningAlphabet) >= numberOfSeatsTogether) {
+						continue;
+					} else {
+						seatsInRow.clear();
+						seatsTogether = 0;
+						break;
+					}
 				}
 
 				if (seatsTogether == numberOfSeatsTogether) {
+					for (String s : seatsInRow) {
+						reserve(s);
+					}
 					return seatsInRow;
 				}
 			}
 		}
+
 		throw new NotEnoughSeatsException();
 
 	}

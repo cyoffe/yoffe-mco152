@@ -8,8 +8,8 @@ public class Game {
 	private Board board;
 
 	public Game() {
-		player1 = new Player(Color.RED, 1);
-		player2 = new Player(Color.BLACK, 2);
+		player1 = new Player(new Color(204, 0, 0), 1);
+		player2 = new Player(new Color(255, 219, 88), 2);
 		board = new Board();
 		playerTurn = player2;
 	}
