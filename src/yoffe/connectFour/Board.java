@@ -13,10 +13,6 @@ public class Board {
 		spacesUsed = 0;
 	}
 
-	public void setBoard(int[][] board) {
-		this.board = board;
-	}
-
 	public int setMove(int col, Player player) {
 		int row = -1;
 		if (!isFull()) {
@@ -27,10 +23,8 @@ public class Board {
 					row = i;
 					spacesUsed++;
 					break;
-
 				}
 			}
-
 			return row;
 		}
 		return row;
@@ -45,7 +39,7 @@ public class Board {
 		return board;
 	}
 
-	public boolean checkIfWinner(int playerNum) {
+	public boolean isWinner(int playerNum) {
 		int count = 0;
 		// checks if there are four consecutive chars of the same value
 		// horizontally

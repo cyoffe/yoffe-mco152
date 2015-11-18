@@ -11,7 +11,7 @@ public class Game {
 		player1 = new Player(new Color(204, 0, 0), 1);
 		player2 = new Player(new Color(255, 219, 88), 2);
 		board = new Board();
-		playerTurn = player2;
+		playerTurn = player1;
 	}
 
 	public Player changePlayerTurn(Player playerTurn) {
@@ -32,10 +32,6 @@ public class Game {
 
 	public Board getBoard() {
 		return board;
-	}
-
-	public boolean isWinner() {
-		return this.board.checkIfWinner(playerTurn.getPlayerNumber());
 	}
 
 }

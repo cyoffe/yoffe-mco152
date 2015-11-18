@@ -16,8 +16,6 @@ public class ConnectFourGUI extends JFrame {
 	private CircleComponent circles[][];
 	private int numColumns = 7;
 	private int numRows = 6;
-	private boolean winner = false;
-
 	private Game game;
 
 	public ConnectFourGUI() {
@@ -44,16 +42,16 @@ public class ConnectFourGUI extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent event) {
 
-					game.changePlayerTurn(game.getWhoseTurn());
 					int row = game.getBoard().setMove(col, game.getWhoseTurn());
-					if (row != -1) { // board is not full
+
+					if (row != -1) {
 
 						circles[row][col].setColor(game.getWhoseTurn().getPlayerColor());
 						circles[row][col].repaint();
 
 						// check if there is a winner
-						winner = game.isWinner();
-						if (winner) {
+
+						if (game.getBoard().isWinner(game.getWhoseTurn().getPlayerNumber())) {
 							JOptionPane.showMessageDialog(container, "WINNER!");
 							int choice = JOptionPane.showConfirmDialog(container, "Do you want to play again?");
 							if (choice == JOptionPane.YES_OPTION) {
@@ -64,9 +62,22 @@ public class ConnectFourGUI extends JFrame {
 							}
 
 						}
+						if (game.getBoard().isFull()) {
+							JOptionPane.showMessageDialog(container, "DRAW!");
+							int choice = JOptionPane.showConfirmDialog(container, "Do you want to play again?");
+							if (choice == JOptionPane.YES_OPTION) {
+								newGame();
+								return;
+							} else {
+								dispose();// end game and close window
+							}
+						}
+
+						game.changePlayerTurn(game.getWhoseTurn());
 					}
 
 				}
+
 			});
 
 			add(buttons[i]);
