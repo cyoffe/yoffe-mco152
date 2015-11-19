@@ -41,8 +41,7 @@ public class Board {
 
 	public boolean isWinner(int playerNum) {
 		int count = 0;
-		// checks if there are four consecutive chars of the same value
-		// horizontally
+		// checks if there are four consecutive in a row
 		for (int row = 0; row < board.length; row++) {
 			count = 0;
 			for (int column = 0; column < board[row].length; column++) {
@@ -57,8 +56,7 @@ public class Board {
 			}
 		}
 
-		// checks if there are four consecutive chars of the same value
-		// vertically
+		// checks if there are four consecutive in a column
 		for (int column = 0; column < board[0].length; column++) {
 			count = 0;
 			for (int row = 0; row < board.length; row++) {
@@ -73,8 +71,7 @@ public class Board {
 			}
 		}
 
-		// checks if there are four consecutive char of the same value
-		// diagonally (positive slope)
+		// checks if there are four consecutive diagonally (positive)
 		for (int row = 3; row < board.length; row++) {
 			for (int column = 0; column < (board[0].length - 3); column++) {
 				if ((board[row][column] == playerNum) && (board[row][column] == board[row - 1][column + 1])
@@ -85,8 +82,7 @@ public class Board {
 			}
 		}
 
-		// checks if there are four consecutive chars of the same value
-		// diagonally (negative slope)
+		// checks if there are four consecutive diagonally (negative)
 		for (int row = 0; row < (board.length - 3); row++) {
 			for (int column = 0; column < (board[0].length - 3); column++) {
 				if ((board[row][column] == playerNum) && (board[row][column] == board[row + 1][column + 1])

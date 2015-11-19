@@ -21,7 +21,6 @@ public class ChooserButton extends JButton {
 
 		g.drawImage(arrow.getImage(), 0, 0, 100, 100, this);
 
-		super.repaint();
 	}
 
 }

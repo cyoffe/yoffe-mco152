@@ -47,7 +47,6 @@ public class ConnectFourGUI extends JFrame {
 					if (row != -1) {
 
 						circles[row][col].setColor(game.getWhoseTurn().getPlayerColor());
-						circles[row][col].repaint();
 
 						// check if there is a winner
 

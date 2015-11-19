@@ -18,13 +18,13 @@ public class CircleComponent extends JComponent {
 	protected void paintComponent(Graphics g) {
 
 		g.setColor(color);
-		g.fillOval(0, 0, 90, 90);
+		g.fillOval(5, 5, 90, 90);
 
-		super.repaint();
 	}
 
 	public void setColor(Color color) {
 		this.color = color;
+		super.repaint();
 	}
 
 }
