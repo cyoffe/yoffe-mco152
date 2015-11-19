@@ -52,8 +52,11 @@ public class ConnectFourGUI extends JFrame {
 						// check if there is a winner
 
 						if (game.getBoard().isWinner(game.getWhoseTurn().getPlayerNumber())) {
-							JOptionPane.showMessageDialog(container, "WINNER!");
-							int choice = JOptionPane.showConfirmDialog(container, "Do you want to play again?");
+
+							Object[] options = { "PLAY AGAIN", "QUIT" };
+							int choice = JOptionPane.showOptionDialog(container, "WINNER!", "GAME OVER!",
+									JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
 							if (choice == JOptionPane.YES_OPTION) {
 								newGame();
 								return;
@@ -63,8 +66,11 @@ public class ConnectFourGUI extends JFrame {
 
 						}
 						if (game.getBoard().isFull()) {
-							JOptionPane.showMessageDialog(container, "DRAW!");
-							int choice = JOptionPane.showConfirmDialog(container, "Do you want to play again?");
+
+							Object[] options = { "PLAY AGAIN", "QUIT" };
+							int choice = JOptionPane.showOptionDialog(container, "DRAW!", "GAME OVER!",
+									JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
 							if (choice == JOptionPane.YES_OPTION) {
 								newGame();
 								return;
