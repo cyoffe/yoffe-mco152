@@ -12,9 +12,9 @@ import java.util.Map;
 public class AirplaneSeats {
 	private int row;
 	private int column;
-	private HashMap<String, String> seatsTaken;
-	private String EMPTY = "o";
-	private String FULL = "#";
+	private HashMap<String, Character> seatsTaken;
+	private Character EMPTY = 'o';
+	private Character FULL = '#';
 
 	int beginningAlphabet = 65; // "A"
 
@@ -28,7 +28,7 @@ public class AirplaneSeats {
 		this.row = rows;
 		this.column = columns;
 
-		seatsTaken = new HashMap<String, String>();
+		seatsTaken = new HashMap<String, Character>();
 		for (int i = 1; i <= rows; i++) {
 			for (char j = 'A'; j < (columns + beginningAlphabet); j++) {
 				seatsTaken.put((j + String.valueOf(i)).toUpperCase(), EMPTY);
@@ -152,7 +152,7 @@ public class AirplaneSeats {
 					seatsInRow.add(seat);
 					seatsTogether++;
 				} else {
-					if (((beginningAlphabet + column) - beginningAlphabet) >= numberOfSeatsTogether) {
+					if (column >= numberOfSeatsTogether) {
 						continue;
 					} else {
 						seatsInRow.clear();
@@ -180,7 +180,7 @@ public class AirplaneSeats {
 					seatsInRow.add(seat);
 					seatsTogether++;
 				} else {
-					if (((beginningAlphabet + column) - beginningAlphabet) >= numberOfSeatsTogether) {
+					if (column >= numberOfSeatsTogether) {
 						continue;
 					} else {
 						seatsInRow.clear();
@@ -208,7 +208,7 @@ public class AirplaneSeats {
 	public boolean isPlaneFull() {
 
 		// iterate through the HashMap's key-value pairs
-		for (Map.Entry<String, String> entry : seatsTaken.entrySet()) {
+		for (Map.Entry<String, Character> entry : seatsTaken.entrySet()) {
 			if (entry.getValue().equals(EMPTY)) {
 				return false;
 

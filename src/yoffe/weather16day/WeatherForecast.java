@@ -1,4 +1,4 @@
-package yoffe.weather;
+package yoffe.weather16day;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.net.URL;
 import com.google.gson.Gson;
 
 public class WeatherForecast {
-	private CurrentWeather weather;
+	private WeatherList weather;
 	private String zipCode;
 	private URL url;
 
@@ -18,11 +18,11 @@ public class WeatherForecast {
 
 	}
 
-	public CurrentWeather getWeather() {
+	public WeatherList getWeather() {
 		return weather;
 	}
 
-	public void setWeather(CurrentWeather weather) {
+	public void setWeather(WeatherList weather) {
 		this.weather = weather;
 	}
 
@@ -39,17 +39,17 @@ public class WeatherForecast {
 			throw new NullPointerException();
 		}
 		this.zipCode = zipCode;
-		this.url = new URL("http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode
-				+ ",us&appid=2de143494c0b295cca9337e1e96b00e0&units=imperial");
+		this.url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + zipCode
+				+ "&cnt=16&APPID=08cd373dd3ca8ae94db32c1191b9bf76&units=imperial");
 		HttpURLConnection connection = (HttpURLConnection) this.url.openConnection();
 		InputStream in = connection.getInputStream();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
 		Gson gson = new Gson();
-		weather = gson.fromJson(reader, CurrentWeather.class);
+		weather = gson.fromJson(reader, WeatherList.class);
 	}
 
-	public void changeZipCode(String zipCode) {
+	public void changeZip(String zipCode) {
 		this.zipCode = zipCode;
 	}
 

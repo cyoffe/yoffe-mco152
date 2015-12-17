@@ -45,8 +45,8 @@ public class WeatherThread extends Thread {
 				forecast.addConnection(zipCode.getText());
 
 				// image
-				url = new URL("http://openweathermap.org/img/w/" + forecast.getWeather().getWeather()[0].getIcon()
-						+ ".png");
+				url = new URL(
+						"http://openweathermap.org/img/w/" + forecast.getWeather().getWeather()[0].getIcon() + ".png");
 
 				img = ImageIO.read(url);
 			} catch (IOException e) {

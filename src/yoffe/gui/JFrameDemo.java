@@ -40,7 +40,7 @@ public class JFrameDemo extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				System.out.println("SMILE");
+				System.out.println(textField.getText());
 
 			}
 		});

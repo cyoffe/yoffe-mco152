@@ -22,7 +22,10 @@ public class SmileJFrame extends JFrame {
 		final BorderLayout layout = new BorderLayout();
 		final Container container = getContentPane();
 		container.setLayout(layout);
-		container.add(new SmileComponent(), BorderLayout.CENTER);
+
+		SmileComponent smile = new SmileComponent();
+
+		container.add(smile, BorderLayout.CENTER);
 
 	}
 }
