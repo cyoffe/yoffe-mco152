@@ -15,8 +15,7 @@ public class ContactsThread extends Thread {
 	private DefaultListModel<String> model;
 	private Contact[] contacts;
 
-	public ContactsThread(DefaultListModel<String> model, Contact[] contacts) throws IOException {
-		this.contacts = contacts;
+	public ContactsThread(DefaultListModel<String> model) throws IOException {
 		this.model = model;
 	}
 
@@ -45,6 +44,10 @@ public class ContactsThread extends Thread {
 
 		}
 
+	}
+
+	public Contact[] getContacts() {
+		return contacts;
 	}
 
 }

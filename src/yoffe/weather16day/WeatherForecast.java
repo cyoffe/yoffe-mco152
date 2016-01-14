@@ -1,5 +1,6 @@
 package yoffe.weather16day;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -39,7 +40,7 @@ public class WeatherForecast {
 		}
 		this.zipCode = zipCode;
 		this.url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + zipCode
-				+ "&cnt=16&APPID=08cd373dd3ca8ae94db32c1191b9bf76&units=imperial");
+				+ "&cnt=16&APPID=c08c6900d895082702317a1b4c3fae0d&units=imperial");
 		HttpURLConnection connection = (HttpURLConnection) this.url.openConnection();
 		InputStream in = connection.getInputStream();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));

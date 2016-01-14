@@ -76,7 +76,8 @@ public class WeatherThread extends Thread {
 			zipCode.requestFocus();
 
 		} catch (NullPointerException | IOException e) {
-			displayErrorMessage();
+			// displayErrorMessage();
+			e.printStackTrace();
 		}
 
 	}

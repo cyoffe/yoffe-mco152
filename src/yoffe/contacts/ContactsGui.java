@@ -8,11 +8,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
 
-import yoffe.weather16day.ContactInfo;
-
 public class ContactsGui extends JFrame {
 	private JList list;
-	Contact[] contacts;
 	private ContactsThread thread;
 
 	public ContactsGui() {
@@ -26,18 +23,15 @@ public class ContactsGui extends JFrame {
 		DefaultListModel<String> model = new DefaultListModel<String>();
 
 		try {
-			thread = new ContactsThread(model, contacts);
+			thread = new ContactsThread(model);
 			thread.start();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		list = new JList(model);
 
 		list.addMouseListener(new MouseAdapter() {
-
-			private Contact[] contact = contacts;
 
 			@Override
 			public void mouseClicked(MouseEvent evt) {
@@ -46,7 +40,7 @@ public class ContactsGui extends JFrame {
 
 					// Double-click detected
 					int index = list.locationToIndex(evt.getPoint());
-					ContactInfo contactWindow = new ContactInfo(list, index, contact);
+					ContactInfo contactWindow = new ContactInfo(index, thread.getContacts());
 
 				}
 			}
