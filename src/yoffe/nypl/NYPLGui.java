@@ -85,7 +85,7 @@ public class NYPLGui extends JFrame {
 				index = list.locationToIndex(evt.getPoint());
 				imagesThread = new ImagesThread(index, searchThread.getResults(), imagePanel);
 				imagesThread.start();
-				num = imagesThread.getResponse().getCapture().length;
+				// num = imagesThread.getResponse().getCapture().length;
 
 			}
 
